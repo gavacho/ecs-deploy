@@ -1,5 +1,14 @@
 language: node_js
 node_js: stable
 script:
-  - npm run check
-  - npm test
+- npm run check
+- npm test
+deploy:
+  provider: npm
+  email: mrkenbrowning@hotmail.com
+  api_key:
+    secure: dDYlV+UakJqhOp6kJ1+/++N7OT9LYyohVZGW8n24t56HqWvaInNFvUheE6/KRcVZQ6k1PcjoPzx9y4/JJlauoE7y5m4C2gb88zyBNMsEcmFeJmPsb/WXMgRnXxXU2YtJe/Lost9cgMCvGrPywyFdXtPSdHLZRoybDbvd6wJMsppyj70bp8mKfBAFOcKz3kFsGFHD4ljvd/fXu5C2bxp0y5lGIB+t4++42pSwaXItO0xqxRDxcIqQdo7jVn4n6DvYv5NvlinFE4k0xrvSB1Dt8jPalAa2h0NqzH2sy3hmf4DBIGnMFkqac2peCKVk20syDy6FAmAZRIMjfX3tvQn4ewKHEtnzyI5RARCSXUB40PLTLI4WBJZ+v1gY8SMxmgkp2Ud6v7LBUxlNyO39QEeZmigBlVt2t9Icb3EItcgi0LxHTE/w1ar12PRir7rqV3cS/qo1V9mONuXe8u+SORMKIJFPp75pjfs/1gV+moIuKdd28oC13D4DbLnDNn+WCNOLSMoAcv45uAoO6rl8sn8Ilpb5V8HONH3QGdjMV78fkxR4ajaNFejGBZoVXVdElprGZLKfwCL+r7M9g7TQ1YSLnMuqDPtIzTYikvOLzDifUcdLWaw6/oUynfyGpRe7b4BIBrAdIReBmjLNcrnSPbJxmnxIk6Z9Gl5tvoL8EBPK5y4=
+  on:
+    tags: true
+    repo: gavacho/ecs-deploy
+    branch: master
