@@ -65,7 +65,7 @@ function nextTask(task, containerName, image, tag) {
 function nextContainer(container, image, tag) {
   return _.assign({}, container, {
     image: image + ':' + tag,
-    environment: upsert(task.containerDefinitions[0].environment, 'name', {
+    environment: upsert(container.environment, 'name', {
       name: 'IMAGE_TAG',
       value: tag
     })
@@ -91,7 +91,7 @@ function falseyKeys(obj) {
 }
 
 function promisifyMethods(obj) {
-  return _.mapValues(_.methods(obj), function(method) {
+  return _.mapValues(_.pick(obj, _.functions(obj)), function(method) {
     return promisify(method.bind(obj));
   });
 }
