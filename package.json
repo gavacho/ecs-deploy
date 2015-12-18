@@ -1,0 +1,50 @@
+{
+  "name": "ecs-deploy",
+  "version": "0.0.1",
+  "description": "Deploy container images to Amazon EC2 Container Service (ECS)",
+  "bin": {
+    "ecs-deploy": "./bin/ecs-deploy.js"
+  },
+  "scripts": {
+    "check": "npm-check-updates && nsp check && eslint .",
+    "test": "echo \"There are no tests.\"",
+    "patch-release": "npm version patch && npm publish && git push --follow-tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gavacho/ecs-deploy.git"
+  },
+  "keywords": [
+    "amazon",
+    "ec2",
+    "container",
+    "service",
+    "ecs",
+    "deploy"
+  ],
+  "author": "@gavacho",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gavacho/ecs-deploy/issues"
+  },
+  "homepage": "https://github.com/gavacho/ecs-deploy#readme",
+  "engines": {
+    "node": ">=0.12"
+  },
+  "dependencies": {
+    "aws-sdk": "2.2.24",
+    "lodash": "3.10.1"
+  },
+  "devDependencies": {
+    "eslint": "1.10.3",
+    "eslint-config-google": "0.3.0",
+    "npm-check-updates": "2.5.4",
+    "nsp": "2.1.0"
+  },
+  "eslint": {
+    "extends": "google",
+    "rules": {
+      "require-jsdoc": [0]
+    }
+  }
+}
