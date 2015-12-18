@@ -1,6 +1,6 @@
 {
   "name": "ecs-deploy",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Deploy container images to Amazon EC2 Container Service (ECS)",
   "bin": {
     "ecs-deploy": "./bin/ecs-deploy.js"
