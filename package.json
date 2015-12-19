@@ -33,13 +33,13 @@
     "node": ">=0.12"
   },
   "dependencies": {
-    "aws-sdk": "2.2.24",
+    "aws-sdk": "2.2.25",
     "lodash": "3.10.1"
   },
   "devDependencies": {
     "eslint": "1.10.3",
     "eslint-config-google": "0.3.0",
-    "npm-check-updates": "2.5.4",
+    "npm-check-updates": "2.5.5",
     "nsp": "2.1.0"
   },
   "eslint": {
