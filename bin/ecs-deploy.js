@@ -5,6 +5,7 @@ var AWS = require('aws-sdk');
 
 invoke(function() {
   var config = overrideValues(process.env, {
+    REGION: '',
     CLUSTER: '',
     SERVICE: '',
     CONTAINER: '',
@@ -20,7 +21,7 @@ invoke(function() {
     );
   }
 
-  var ecs = promisifyMethods(new AWS.ECS());
+  var ecs = promisifyMethods(new AWS.ECS({ region: config.REGION }));
 
   return ecs.describeServices({
     cluster: config.CLUSTER, services: [config.SERVICE]

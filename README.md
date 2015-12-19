@@ -6,12 +6,13 @@ Applications running inside the container will have access to an environment var
 ## Configuration
 
 ### A note about working with AWS
-In order to communicate with AWS, the `aws-sdk` library needs to be configured with your authentication credentials and, possibly, with the aws region you wish to target.  More information can be found [here](http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/node-configuring.html#Credentials_from_Environment_Variables).  If you already use the aws cli then you're likely already configured.
+If you've run `aws configure` using use the [aws cli](https://aws.amazon.com/cli/) tool then you probably already have the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables defined.  Otherwise, you will need to set some [environment variables](http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/node-configuring.html#Credentials_from_Environment_Variables) so that `ecs-deploy` can interact with AWS on your behalf.
 
 In order to deploy your container, you need to provide this tool with some information in the form of environment variables:
 
 |Variable Name        |Description                                        |
 |---------------------|---------------------------------------------------|
+|REGION               |The AWS region                                     |
 |CLUSTER              |The name of the target ECS cluster                 |
 |SERVICE              |The name of the target ECS service                 |
 |CONTAINER            |The name of the target ECS container               |
@@ -31,7 +32,7 @@ Add a `deploy` script to your `package.json`:
 ```json
 {
   "scripts": {
-    "deploy": "CLUSTER=my_cluster SERVICE=my_service CONTAINER=my_container IMAGE=my_user/my_repo ecs-deploy"
+    "deploy": "REGION=us-west-1 CLUSTER=my_cluster SERVICE=my_service CONTAINER=my_container IMAGE=my_user/my_repo ecs-deploy"
   }
 }
 ```
