@@ -54,6 +54,7 @@ function nextTask(task, containerName, image, tag) {
   return {
     family: task.family,
     volumes: task.volumes,
+    taskRoleArn: task.taskRoleArn,
     containerDefinitions: task.containerDefinitions.map(function(container) {
       if (container.name === containerName) {
         return nextContainer(container, image, tag);
