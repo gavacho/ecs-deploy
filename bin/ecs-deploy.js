@@ -66,10 +66,6 @@ function nextTask(task, containerName, image, tag) {
 function nextContainer(container, image, tag) {
   return _.assign({}, container, {
     image: image + ':' + tag,
-    environment: upsert(container.environment, 'name', {
-      name: 'IMAGE_TAG',
-      value: tag
-    })
   });
 }
 
