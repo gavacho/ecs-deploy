@@ -1,8 +1,6 @@
 #ecs-deploy
 Deploy container images to Amazon EC2 Container Service (ECS).
 
-In addition to updating a container's image, this tool will configure the container with an environment variable named `IMAGE_TAG`.  That environment variable can be used by applications inside the container to know which tag is running.
-
 ## Configuration
 
 Unless indicated, the following environment variables are required:
@@ -20,6 +18,13 @@ Unless indicated, the following environment variables are required:
 | IMAGE_TAG | The tag to be deployed |
 
 ## Example Usage
+
+```bash
+npm install --global ecs-deploy
+REGION=us-west-1 CLUSTER=my-cluster SERVICE=my-service CONTAINER=my-container IMAGE=my-user/my-repo IMAGE_TAG=latest ecs-deploy
+```
+
+## Alternate Usage
 
 Install from the command line:
 
