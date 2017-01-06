@@ -1,8 +1,7 @@
 language: node_js
 node_js: stable
-script:
-- npm run check
-- npm test
+before_install:
+- npm i -g nsp && nsp check
 deploy:
   provider: npm
   email: mrkenbrowning@hotmail.com

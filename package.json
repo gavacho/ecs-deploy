@@ -6,11 +6,7 @@
     "ecs-deploy": "./bin/ecs-deploy.js"
   },
   "scripts": {
-    "check": "npm-check-updates && nsp check && eslint .",
-    "test": "echo \"There are no tests.\"",
-    "patch-release": "npm version patch && git push --follow-tags",
-    "minor-release": "npm version minor && git push --follow-tags",
-    "major-release": "npm version major && git push --follow-tags"
+    "test": "eslint ."
   },
   "repository": {
     "type": "git",
