@@ -109,8 +109,3 @@ function promisify(fn) {
     });
   };
 }
-
-function upsert(array, keys, item) {
-  var id = _.pick(item, keys);
-  return _.without(array, _.find(array, id)).concat(item);
-}
