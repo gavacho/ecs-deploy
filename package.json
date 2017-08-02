@@ -30,21 +30,38 @@
     "node": ">=0.12"
   },
   "dependencies": {
-    "aws-sdk": "2.6.2",
-    "lodash": "3.10.1"
+    "aws-sdk": "^2.0.0",
+    "lodash": "^4.0.0"
   },
   "devDependencies": {
-    "eslint": "1.10.3",
-    "eslint-config-google": "0.3.0",
-    "npm-check-updates": "2.5.5",
-    "nsp": "2.1.0"
+    "eslint": "^4.0.0"
   },
-  "eslint": {
-    "extends": "google",
+  "eslintConfig": {
+    "env": {
+      "node": true
+    },
+    "extends": "eslint:recommended",
+    "globals": {
+      "Promise": true
+    },
     "rules": {
-      "require-jsdoc": [
-        0
-      ]
+      "indent": [
+        "error",
+        2
+      ],
+      "linebreak-style": [
+        "error",
+        "unix"
+      ],
+      "quotes": [
+        "error",
+        "single"
+      ],
+      "semi": [
+        "error",
+        "always"
+      ],
+      "no-console": "off"
     }
   }
 }

@@ -89,7 +89,7 @@ function falseyKeys(obj) {
 }
 
 function promisifyMethods(obj) {
-  return _.mapValues(_.pick(obj, _.functions(obj)), function(method) {
+  return _.mapValues(_.pick(obj, _.functionsIn(obj)), function(method) {
     return promisify(method.bind(obj));
   });
 }
