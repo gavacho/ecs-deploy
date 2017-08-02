@@ -21,6 +21,7 @@ invoke(function() {
     'CONTAINER',
     'IMAGE',
     'IMAGE_TAG',
+    'WAIT',
   ]);
 
   var ecs = promisifyMethods(new AWS.ECS({ region: config.REGION }));
@@ -45,6 +46,15 @@ invoke(function() {
         cluster: config.CLUSTER,
         service: config.SERVICE,
         taskDefinition: registeredTask.taskDefinitionArn
+      });
+    }).then(function(result) {
+      if ((config.WAIT || 'false') === 'false') {
+        return result;
+      }
+      console.log('Waiting for service stability...');
+      return ecs.waitFor('servicesStable', {
+        cluster: config.CLUSTER,
+        services: [config.SERVICE],
       });
     });
 }).catch(function(error) {

@@ -16,12 +16,13 @@ Unless indicated, the following environment variables are required:
 | CONTAINER | The name of the target ECS container |
 | IMAGE | The image repository (e.g. some-user/some-app) |
 | IMAGE_TAG | The tag to be deployed |
+| WAIT | Wait until the service has reached a stable state (defaults to false) |
 
 ## Example Usage
 
 ```bash
 npm install --global ecs-deploy
-REGION=us-west-1 CLUSTER=my-cluster SERVICE=my-service CONTAINER=my-container IMAGE=my-user/my-repo IMAGE_TAG=latest ecs-deploy
+REGION=us-west-1 CLUSTER=my-cluster SERVICE=my-service CONTAINER=my-container IMAGE=my-user/my-repo IMAGE_TAG=latest WAIT=true ecs-deploy
 ```
 
 ## Alternate Usage
