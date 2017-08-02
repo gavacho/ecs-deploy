@@ -2,24 +2,27 @@
 
 var _ = require('lodash');
 var AWS = require('aws-sdk');
+var requireEnvVariables = require('require-environment-variables');
 
 invoke(function() {
-  var config = overrideValues(process.env, {
-    REGION: '',
-    CLUSTER: '',
-    SERVICE: '',
-    CONTAINER: '',
-    IMAGE: '',
-    IMAGE_TAG: '',
-  });
+  requireEnvVariables([
+    'REGION',
+    'CLUSTER',
+    'SERVICE',
+    'CONTAINER',
+    'IMAGE',
+    'IMAGE_TAG',
+  ]);
 
-  var missingValues = falseyKeys(config);
-  if (missingValues.length) {
-    throw new Error(
-      'Error: All configuration values are required.  ' +
-      'Missing values: ' + missingValues.join(', ')
-    );
-  }
+  var config = _.pick(process.env, [
+    'REGION',
+    'CLUSTER',
+    'SERVICE',
+    'CONTAINER',
+    'IMAGE',
+    'IMAGE_TAG',
+    'WAIT',
+  ]);
 
   var ecs = promisifyMethods(new AWS.ECS({ region: config.REGION }));
 
@@ -43,6 +46,15 @@ invoke(function() {
         cluster: config.CLUSTER,
         service: config.SERVICE,
         taskDefinition: registeredTask.taskDefinitionArn
+      });
+    }).then(function(result) {
+      if ((config.WAIT || 'false') === 'false') {
+        return result;
+      }
+      console.log('Waiting for service stability...');
+      return ecs.waitFor('servicesStable', {
+        cluster: config.CLUSTER,
+        services: [config.SERVICE],
       });
     });
 }).catch(function(error) {
@@ -80,16 +92,8 @@ function invoke(block) {
   });
 }
 
-function overrideValues(overrides, defaults) {
-  return _.assign({}, defaults, _.pick(overrides, _.keys(defaults)));
-}
-
-function falseyKeys(obj) {
-  return _.keys(_.pick(obj, _.negate(_.identity)));
-}
-
 function promisifyMethods(obj) {
-  return _.mapValues(_.pick(obj, _.functions(obj)), function(method) {
+  return _.mapValues(_.pick(obj, _.functionsIn(obj)), function(method) {
     return promisify(method.bind(obj));
   });
 }
