@@ -2,24 +2,26 @@
 
 var _ = require('lodash');
 var AWS = require('aws-sdk');
+var requireEnvVariables = require('require-environment-variables');
 
 invoke(function() {
-  var config = overrideValues(process.env, {
-    REGION: '',
-    CLUSTER: '',
-    SERVICE: '',
-    CONTAINER: '',
-    IMAGE: '',
-    IMAGE_TAG: '',
-  });
+  requireEnvVariables([
+    'REGION',
+    'CLUSTER',
+    'SERVICE',
+    'CONTAINER',
+    'IMAGE',
+    'IMAGE_TAG',
+  ]);
 
-  var missingValues = falseyKeys(config);
-  if (missingValues.length) {
-    throw new Error(
-      'Error: All configuration values are required.  ' +
-      'Missing values: ' + missingValues.join(', ')
-    );
-  }
+  var config = _.pick(process.env, [
+    'REGION',
+    'CLUSTER',
+    'SERVICE',
+    'CONTAINER',
+    'IMAGE',
+    'IMAGE_TAG',
+  ]);
 
   var ecs = promisifyMethods(new AWS.ECS({ region: config.REGION }));
 
@@ -78,14 +80,6 @@ function invoke(block) {
       reject(error);
     }
   });
-}
-
-function overrideValues(overrides, defaults) {
-  return _.assign({}, defaults, _.pick(overrides, _.keys(defaults)));
-}
-
-function falseyKeys(obj) {
-  return _.keys(_.pick(obj, _.negate(_.identity)));
 }
 
 function promisifyMethods(obj) {
